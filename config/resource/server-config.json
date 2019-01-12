@@ -1,0 +1,25 @@
+{
+    "host" : "localhost",
+    "port" : "18080",
+    "context" : "/api/v1",
+    "server" : [
+        {
+            "name" : "task-update",
+            "path" : "/task/update",
+            "method" : "PATCH",
+            "responseStatus" : "200"
+        },
+        {
+            "name" : "task",
+            "path" : "/task/fetch",
+            "method" : "GET",
+            "responseStatus" : "200"
+        },
+        {
+            "name" : "task-register",
+            "path" : "/task/register",
+            "method" : "POST",
+            "responseStatus" : "201"
+        }
+    ]
+}
