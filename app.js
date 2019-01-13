@@ -1,11 +1,15 @@
+"use strict";
+
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var cors = require("cors");
 
 var indexRouter = require("./routes/index");
 var configParser = require("./util/config-parser");
+var config = configParser.parseConfig();
 
 //-----------------------
 // ミドルウェア設定
@@ -21,6 +25,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+// CORSを許可
+if(config.allowCors){
+    app.use(cors());
+}
 
 //-----------------------
 // パスルーティング
@@ -45,7 +54,6 @@ app.use(function(err, req, res, next) {
 });
 
 // 待受ポート
-var config = configParser.parseConfig();
 app.listen(config.port);
 
 module.exports = app;

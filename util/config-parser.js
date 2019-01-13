@@ -17,14 +17,20 @@ function hasValidConfig(){
     // 設定ファイルの読み込み
     var config = JSON.parse(fs.readFileSync(__dirname +"/../config/resource/server-config.json"));
 
-    // 設定できないHTTPリクエストの場合、警告ログ出力
     for (let resource of config.server){
         var matched = _.find(["GET", "PUT", "PATCH", "DELETE", "POST"], function(method){
             return method === resource.method;
         });
-
+        
+        // HTTPリクエストメソッドの設定チェック
         if (typeof matched === undefined) {
             console.error('HTTPメソッドが正しく設定されていません : ' + resource.method);
+            return false;
+        }
+
+        // ステータスコードの設定チェック
+        if(resource.responseStatus < 100 || resource.responseStatus > 599){
+            console.error("レスポンスステータスの設定が不正です。リソース名 : " + resource.name);
             return false;
         }
     }

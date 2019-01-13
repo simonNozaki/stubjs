@@ -11,6 +11,9 @@ var fs = require("fs");
 var configParser = require("../util/config-parser");
 var stringUtil = require("../util/string-util");
 var objectUtil = require("../util/object-util");
+var appConst = require("../const/app-const");
+var httpHeaderKey = require("../const/http-const").HTTP_HEADER_KEY;
+var httpHeaderValue = require("../const/http-const").HTTP_HEADER_VALUE;
 
 var config = configParser.parseConfig();
 
@@ -36,41 +39,44 @@ for(let resource of config.server){
         url = url + resource.path;
     }
 
+    // HTTPメソッド : URIパス
+    console.log(resource.method + appConst.STD_OUT_CONST.COLON_WITH_SPACE + url);
+
     // HTTPメソッドに沿ってルーティング定義
     switch (resource.method) {
         case "GET":
-            router.get(url, function(req, res){
-                res.status(resource.responseStatus);
+            router.get(url, function(req, res, next){
                 console.log(stringUtil.appendStdOut(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
-                res.send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
+                res.status(resource.responseStatus).send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
+                next();
             });
             break;
         case "POST":
-            router.post(url, function(req, res){
-                res.status(resource.responseStatus);
+            router.post(url, function(req, res, next){
                 console.log(stringUtil.appendStdOut(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
-                res.send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
+                res.status(resource.responseStatus).send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
+                next();
             });
             break;
         case "PUT":
-            router.put(url, function(req, res){
-                res.status(resource.responseStatus);
+            router.put(url, function(req, res, next){
                 console.log(stringUtil.appendStdOut(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
-                res.send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
+                res.status(resource.responseStatus).send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
+                next();
             });
             break;
         case "PATCH":
-            router.patch(url, function(req, res){
-                res.status(resource.responseStatus);
+            router.patch(url, function(req, res, next){
                 console.log(stringUtil.appendStdOut(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
-                res.send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
+                res.status(resource.responseStatus).send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
+                next();
             });
             break;
         case "DELETE":
-            router.delete(url, function(req, res){
-                res.status(resource.responseStatus);
+            router.delete(url, function(req, res, next){
                 console.log(stringUtil.appendStdOut(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
-                res.send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
+                res.status(resource.responseStatus).send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
+                next();
             });
             break;
         default:
