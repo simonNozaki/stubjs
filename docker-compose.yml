@@ -1,0 +1,14 @@
+version: "2"
+services:
+  stubjs:
+    image: "node:8.15.0-alpine"
+    container_name: stubjs
+    user: "node"
+    working_dir: /data01/web-service
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./:/data01/web-service
+    ports:
+      - 18080:18080
+    command: "npm start"

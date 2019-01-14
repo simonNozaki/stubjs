@@ -12,8 +12,6 @@ var configParser = require("../util/config-parser");
 var stringUtil = require("../util/string-util");
 var objectUtil = require("../util/object-util");
 var appConst = require("../const/app-const");
-var httpHeaderKey = require("../const/http-const").HTTP_HEADER_KEY;
-var httpHeaderValue = require("../const/http-const").HTTP_HEADER_VALUE;
 
 var config = configParser.parseConfig();
 
