@@ -52,7 +52,12 @@ const HTTP_HEADER_VALUE = {
     /**
      * HTTPメソッド、PATCH
      */
-    HTTP_METHOD_PATCH : "PACTH"
+    HTTP_METHOD_PATCH : "PACTH",
+
+    /**
+     * HTTPメソッド、DELETE
+     */
+    HTTP_METHOD_DELETE : "DELETE"
 
 };
 module.exports.HTTP_HEADER_VALUE = HTTP_HEADER_VALUE;

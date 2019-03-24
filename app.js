@@ -9,6 +9,7 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 var configParser = require("./util/config-parser");
 var config = configParser.parseConfig();
+var cors = require("cors");
 
 //-----------------------
 // ミドルウェア設定
@@ -27,8 +28,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // CORSを許可
 if(config.allowCors){
-    var cors = require("cors");
-    app.use(cors());
+  app.use(cors());
 }
 
 //-----------------------
@@ -39,7 +39,8 @@ app.all("*", indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+    next(createError(404));
+    console.log("受け付けたリクエストにはリソースが存在しません。");
 });
 
 // error handler

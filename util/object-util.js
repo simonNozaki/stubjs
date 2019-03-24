@@ -7,7 +7,7 @@
 function isNullOrUndefined(subject){
 
     // null
-    if(typeof subject === null){
+    if(typeof subject == null){
         return true;
     }
 
@@ -17,7 +17,7 @@ function isNullOrUndefined(subject){
     }
 
     // 空文字
-    if(typeof subject === String || subject === ""){
+    if(typeof subject === String && subject === ""){
         return true;
     }
 
