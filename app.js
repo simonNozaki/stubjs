@@ -9,6 +9,8 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 var configParser = require("./util/config-parser");
 var config = configParser.parseConfig();
+var appConst = require("./const/app-const");
+var stdoutstr = appConst.STD_OUT_CONST;
 
 //-----------------------
 // ミドルウェア設定
@@ -30,6 +32,12 @@ if(config.allowCors){
     var cors = require("cors");
     app.use(cors());
 }
+
+// interceptor for request
+app.use(function(req, res, next){
+    console.log(stdoutstr.STR_PROCESS_START);
+    next();
+});
 
 //-----------------------
 // パスルーティング

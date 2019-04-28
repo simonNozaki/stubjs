@@ -18,6 +18,16 @@ const STD_OUT_CONST = {
      * トレースメッセージ終了
      */
     TRACE_END : "[Trace log end]",
+
+    /**
+     * APIの処理を開始します。
+     */
+    STR_PROCESS_START : "APIの処理を開始します。",
+
+    /**
+     * APIの処理を終了します。
+     */
+    STR_PROCESS_END : "APIの処理を終了します。",
     
     /**
      * 改行コード

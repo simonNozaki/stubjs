@@ -4,40 +4,40 @@
             "taskId" : "TK00000001",
             "taskTitle" : "sample1",
             "taskLabel" : "sample tag",
-            "startDate" : "19-01-10 00:00:00",
-            "deadline" : "",
+            "startDate" : "2019-01-10",
+            "deadline" : "2019-01-11",
             "userId" : "TM00000001"
         },
         {
             "taskId" : "TK00000002",
             "taskTitle" : "sample2",
             "taskLabel" : "sample tag",
-            "startDate" : "19-01-10 00:00:00",
-            "deadline" : "",
+            "startDate" : "2019-01-10",
+            "deadline" : "2019-01-13",
             "userId" : "TM00000001"
         },
         {
             "taskId" : "TK00000003",
             "taskTitle" : "sample3",
             "taskLabel" : "sample tag",
-            "startDate" : "19-01-10 00:00:00",
-            "deadline" : "",
+            "startDate" : "2019-01-10",
+            "deadline" : "2019-01-20",
             "userId" : "TM00000001"
         },
         {
             "taskId" : "TK00000004",
             "taskTitle" : "sample3",
             "taskLabel" : "sample tag2",
-            "startDate" : "19-01-10 00:00:00",
-            "deadline" : "",
+            "startDate" : "2019-01-10",
+            "deadline" : "2019-01-21",
             "userId" : "TM00000001"
         },
         {
             "taskId" : "TK00000005",
             "taskTitle" : "sample3",
             "taskLabel" : "sample tag2",
-            "startDate" : "19-01-10 00:00:00",
-            "deadline" : "",
+            "startDate" : "2019-01-10",
+            "deadline" : "2019-01-12",
             "userId" : "TM00000001"
         }
     ]

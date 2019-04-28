@@ -45,36 +45,31 @@ for(let resource of config.server){
         case "GET":
             router.get(url, function(req, res, next){
                 console.log(stringUtil.appendStdOut(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
-                res.status(resource.responseStatus).send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
-                next();
+                return res.header(resource.responseStatus).send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
             });
             break;
         case "POST":
             router.post(url, function(req, res, next){
                 console.log(stringUtil.appendStdOut(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
-                res.status(resource.responseStatus).send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
-                next();
+                return res.status(resource.responseStatus).send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
             });
             break;
         case "PUT":
             router.put(url, function(req, res, next){
                 console.log(stringUtil.appendStdOut(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
-                res.status(resource.responseStatus).send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
-                next();
+                return res.status(resource.responseStatus).send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
             });
             break;
         case "PATCH":
             router.patch(url, function(req, res, next){
                 console.log(stringUtil.appendStdOut(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
-                res.status(resource.responseStatus).send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
-                next();
+                return res.status(resource.responseStatus).send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
             });
             break;
         case "DELETE":
             router.delete(url, function(req, res, next){
                 console.log(stringUtil.appendStdOut(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
-                res.status(resource.responseStatus).send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
-                next();
+                return res.status(resource.responseStatus).send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
             });
             break;
         default:
