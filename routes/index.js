@@ -43,16 +43,6 @@ for(let resource of config.server){
     // HTTPメソッド : URIパス
     console.log(resource.method + appConst.STD_OUT_CONST.COLON_WITH_SPACE + url);
 
-    /**
-     * 全メソッド共通コールバック関数定義
-     */
-    const callbackApi = function(req, res, next){
-        console.log("スタブAPIの処理を開始します - " + resource.method + appConst.STD_OUT_CONST.COLON_WITH_SPACE + url);
-        console.log(stringUtil.appendStdOut(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
-        console.log("スタブAPIの処理を終了します - " + resource.method + appConst.STD_OUT_CONST.COLON_WITH_SPACE + url);
-        next();
-    }
-
     // HTTPメソッドに沿ってルーティング定義
     switch (resource.method) {
         case "GET":
