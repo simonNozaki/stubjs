@@ -1,6 +1,8 @@
 "use strict";
 const _ = require("underscore");
 const fs = require("fs");
+const httpHeaderValue = require("../const/http-const").HTTP_HEADER_VALUE;
+const isNullOrUndefined = require("../util/object-util").isNullOrUndefined;
 
 /**
  * 設定の正常性確認します。
@@ -18,12 +20,15 @@ function hasValidConfig(){
     var config = JSON.parse(fs.readFileSync(__dirname +"/../config/resource/server-config.json"));
 
     for (let resource of config.server){
-        var matched = _.find(["GET", "PUT", "PATCH", "DELETE", "POST"], function(method){
-            return method === resource.method;
-        });
+        var matched = _.find([httpHeaderValue.HTTP_METHOD_GET, httpHeaderValue.HTTP_METHOD_POST, httpHeaderValue.HTTP_METHOD_DELETE, 
+            httpHeaderValue.HTTP_METHOD_PATCH, httpHeaderValue.HTTP_METHOD_PUT],
+            function(method){
+                return method === resource.method;
+            }
+        );
         
         // HTTPリクエストメソッドの設定チェック
-        if (typeof matched === undefined) {
+        if (isNullOrUndefined(matched)) {
             console.error('HTTPメソッドが正しく設定されていません : ' + resource.method);
             return false;
         }

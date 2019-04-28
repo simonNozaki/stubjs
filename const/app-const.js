@@ -42,7 +42,12 @@ const STD_OUT_CONST = {
     /**
      * コロン
      */
-    COLON : ":"
+    COLON : ":",
+
+    /**
+     * スラッシュ
+     */
+    STR_SLASH : "/"
 
 };
 module.exports.STD_OUT_CONST = STD_OUT_CONST;

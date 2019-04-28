@@ -16,8 +16,11 @@ var appConst = require("../const/app-const");
 var config = configParser.parseConfig();
 
 // ヘルスチェック
-router.get("/healthcheck", function(req, res){
-    res.send(JSON.parse(fs.readFileSync(__dirname + '/../stub/healthcheck.json')));
+router.get("/healthcheck", function(res, req){
+    console.log("スタブAPIの処理を開始します - " + resource.method + appConst.STD_OUT_CONST.COLON_WITH_SPACE + url);
+    console.log(stringUtil.appendStdOut(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
+    console.log("スタブAPIの処理を終了します - " + resource.method + appConst.STD_OUT_CONST.COLON_WITH_SPACE + url);
+    next();
 });
 
 // 設定ファイルから、リクエストとレスポンスの対応関係をExpressに定義します
@@ -32,13 +35,23 @@ for(let resource of config.server){
     }
 
     if (resource.path == '' ||resource.path == null) {
-        url += '/'
+        url += appConst.STD_OUT_CONST.STR_SLASH
     } else {
         url = url + resource.path;
     }
 
     // HTTPメソッド : URIパス
     console.log(resource.method + appConst.STD_OUT_CONST.COLON_WITH_SPACE + url);
+
+    /**
+     * 全メソッド共通コールバック関数定義
+     */
+    const callbackApi = function(req, res, next){
+        console.log("スタブAPIの処理を開始します - " + resource.method + appConst.STD_OUT_CONST.COLON_WITH_SPACE + url);
+        console.log(stringUtil.appendStdOut(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
+        console.log("スタブAPIの処理を終了します - " + resource.method + appConst.STD_OUT_CONST.COLON_WITH_SPACE + url);
+        next();
+    }
 
     // HTTPメソッドに沿ってルーティング定義
     switch (resource.method) {
@@ -77,5 +90,6 @@ for(let resource of config.server){
             break;
     }
 }
+
 
 module.exports = router;
