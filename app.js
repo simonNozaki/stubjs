@@ -47,8 +47,8 @@ app.all("*", indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    next(createError(404));
     console.log("受け付けたリクエストにはリソースが存在しません。");
+    next(createError(404));
 });
 
 // error handler

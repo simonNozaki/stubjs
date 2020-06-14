@@ -5,46 +5,10 @@
     "allowCors" : true,
     "server" : [
         {
-            "name" : "task",
-            "path" : "/task/fetch",
+            "name" : "color-retrieving",
+            "path" : "/color",
             "method" : "GET",
             "responseStatus" : "200"
-        },
-        {
-            "name" : "task-register",
-            "path" : "/task/register",
-            "method" : "POST",
-            "responseStatus" : "201"
-        },
-        {
-            "name" : "task-label",
-            "path" : "/task/label",
-            "method" : "GET",
-            "responseStatus" : "200"
-        },
-        {
-            "name" : "task-label-register",
-            "path" : "/task/label",
-            "method" : "POST",
-            "responseStatus" : "201"
-        },
-        {
-            "name" : "task-complete",
-            "path" : "/task/complete",
-            "method" : "PATCH",
-            "responseStatus" : "200"
-        },
-        {
-            "name" : "user-signin",
-            "path" : "/user/signin",
-            "method" : "POST",
-            "responseStatus" : "200"
-        },
-        {
-            "name" : "user-signup",
-            "path" : "/user/signup",
-            "method" : "POST",
-            "responseStatus" : "201"
         }
     ]
 }

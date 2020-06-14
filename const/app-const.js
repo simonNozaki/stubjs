@@ -20,6 +20,11 @@ const STD_OUT_CONST = {
     TRACE_END : "[Trace log end]",
 
     /**
+     * 区切り線
+     */
+    STR_SEPARATOR : "#########################",
+
+    /**
      * APIの処理を開始します。
      */
     STR_PROCESS_START : "APIの処理を開始します。",

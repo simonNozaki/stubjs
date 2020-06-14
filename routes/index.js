@@ -15,15 +15,23 @@ var appConst = require("../const/app-const");
 
 var config = configParser.parseConfig();
 
+// -----------------
+// 起動ログ
+// -----------------
+console.log(appConst.STD_OUT_CONST.STR_SEPARATOR + appConst.STD_OUT_CONST.TRACE_NEW_LINE + "stubjs" + appConst.STD_OUT_CONST.TRACE_NEW_LINE + appConst.STD_OUT_CONST.STR_SEPARATOR
+    + appConst.STD_OUT_CONST.TRACE_NEW_LINE);
+
 // ヘルスチェック
 router.get("/healthcheck", function(res, req){
     console.log("スタブAPIの処理を開始します - " + resource.method + appConst.STD_OUT_CONST.COLON_WITH_SPACE + url);
-    console.log(stringUtil.appendStdOut(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
+    console.log(stringUtil.appendStdOut(fs.readFileSync(__dirname + '/../stub/healthcheck.json')));
     console.log("スタブAPIの処理を終了します - " + resource.method + appConst.STD_OUT_CONST.COLON_WITH_SPACE + url);
     next();
 });
 
-// 設定ファイルから、リクエストとレスポンスの対応関係をExpressに定義します
+// -----------------
+// コールバック関数のマップ
+// -----------------
 for(let resource of config.server){
 
     // URLの識別
@@ -53,6 +61,7 @@ for(let resource of config.server){
             break;
         case "POST":
             router.post(url, function(req, res, next){
+                console.log("リクエストを受け付けました : ", stringUtil.appendStdOut(JSON.stringify(req.body)), appConst.STD_OUT_CONST.TRACE_NEW_LINE);
                 console.log(stringUtil.appendStdOut(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
                 return res.status(resource.responseStatus).send(JSON.parse(fs.readFileSync(__dirname + '/../stub/' + resource.name + '.json')));
             });
