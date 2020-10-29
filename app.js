@@ -5,6 +5,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+const log4js = require("./util/logger");
 
 var indexRouter = require("./routes/index");
 var configParser = require("./util/config-parser");
@@ -14,7 +15,7 @@ var stdoutstr = appConst.STD_OUT_CONST;
 var cors = require("cors");
 
 //-----------------------
-// ミドルウェア設定
+// Middlewares
 //-----------------------
 var app = express();
 
@@ -40,26 +41,29 @@ app.use(function(req, res, next){
 });
 
 //-----------------------
-// パスルーティング
+// Path routing
 //-----------------------
-// 全て単一のControllerで制御
 app.all("*", indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    console.log("受け付けたリクエストにはリソースが存在しません。");
+    log4js.warn(appConst.STD_OUT_CONST.STR_RESOURCE_NOT_FOUND);
     next(createError(404));
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
+
+    log4js.warn(appConst.STD_OUT_CONST.STR_SYSTEM_ERROR);
+    res.status(err.status || 500);
+
+    const error = __dirname + '/../stub/error.json';
+
+    res.render("error").send(JSON.parse(fs.readFileSync(error)))
 });
 
 // 待受ポート

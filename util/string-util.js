@@ -26,3 +26,13 @@ function appendStdOut(object){
 
 };
 module.exports.appendStdOut = appendStdOut;
+
+function isNotNullAndEmpty(string) {
+
+    if (string === null || string === "") {
+        return false;
+    }
+
+    return true;
+}
+module.exports = isNotNullAndEmpty;

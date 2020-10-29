@@ -1,33 +1,54 @@
 # stubjs
-nodejsによる、スタブのREST APIサーバです。  
-固定のレスポンスを、URIおよびHTTPメソッドに応じて柔軟に返します。
+A REST API server for stubs with nodejs.
+It returns a fixed response depending on the URI and HTTP methods written in settings.
 
-# 1. 使い方
-## 1-1. 設定方法
-`config/resource/server-config.json`を必要に応じて書き換える。  
-## 1-2. 設定項目
-- `port` : スタブサーバ待受ポート番号。
-- `context` : コンテキストパス。APIなどのように、URIにコンテキストをもたせたい場合に設定する。必須ではないです。空文字の場合、単に設定がスキップされます。
-- `server` : 返却するリソースの設定。以下項目をもったオブジェクトを配列で指定する。
-  - `name` : <要素必須> リソース名。後述のスタブファイルの名前を指定すること。
-  - `path` : <要素必須> URIパス。
-  - `method` : <要素必須> HTTPメソッド。
-  - `responseStatus` : <要素必須> HTTPのステータスコード。指定がある場合、指定されたレスポンスコードで返却する。
-### 1-3. スタブファイル
-`stub`配下に、JSON形式で配置する。ファイル名は、返却したいURIリソースの`name`に合わせること。
-### 1-4. リクエストデータの設定
-不要です。stubjsは、どのようなリクエストを受け取るかを全く気にせず、リソースを設定に従って返却します。
+## 1. Usage
+### 1-1. Setting method
+Set `config/resource/server-config.json` for your situation.
+### 1-2. Setting items
 
-# 2. 起動方法
-## 2-1. ローカルのnode.jsで起動する
-デフォルトで `/healthcheck` メソッドが用意されているので、そのメソッドにリクエストを送信してみます。  
-まずは、`node app.js`で起動します。  
-curlにて、以下のように結果が返却されればOK。  
-リクエスト: 
-`curl localhost:18080/healthcheck`  
+|item|required|description|
+| ---- | ---- | ---- |
+|host|true|Server running host name.|
+|port|true|Stub server standby port number|
+|context| - |Context path. Set when you want to give context to URI like API. If empty, the setting is simply skipped.|
+|allowCors|true|If "true" is set, the server accept CORS requests.|
+|server|true|Setting of resources to be returned. Specify the object with the following items as an array. This accepts multiple settings.|
+|server.name|true|Resource name. Specify the name of the stub file described below.|
+|server.path|true|URI path.|
+|server.method|true|HTTP method.|
+|responseStatus|true|HTTP status code. If specified, it will be returned with the specified response code.|
 
-結果: `{"key":"value"}`
-## 2-2. Dockerで起動する
-Docker composeで立ち上げることができます。  
-`$ docker-compose up`  
-でOKです。バックグラウンド起動したい場合は `-d` オプションを付与してください。
+
+This is a setting sample:
+```js
+{
+    "host" : "localhost",
+    "port" : 18080,
+    "context" : "/api/v1",
+    "allowCors" : true,
+    "server" : [
+        {
+            "name" : "color-retrieving",
+            "path" : "/color",
+            "method" : "GET",
+            "responseStatus" : 200
+        }
+    ]
+}
+```
+### 1-3. Stub file
+Place it in JSON format under `stub` directory. Match the file name with the `name` of the URI resource you want to return.
+### 1-4. Request data settings
+*Not Required* stubjs does not care what kind of request it receives and returns the resource according to the settings.
+
+## 2. How to start
+### 2-1. Start with local node.js
+The `/ healthcheck` method is provided by default, so let's send a request to that method.
+First, start it with `node app.js`.
+If curl returns the result as below, it's OK.
+- request : `curl http://localhost:18080/healthcheck`
+- response: `{"key ":" value "}`
+### 2-2. Start with Docker
+You can launch it with Docker compose only below:
+`$ docker-compose up`

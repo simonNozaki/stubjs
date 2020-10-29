@@ -1,8 +1,9 @@
 "use strict";
 
 /**
- * オブジェクトが空もしくは未定義であるかを確認します。
- * @param {Object} subject 非検査対象オブジェクト
+ * Innspect parameter is null or undefined.
+ * This method expects the argument is an instance of Object class.
+ * @param {Object} subject
  */
 function isNullOrUndefined(subject){
 
@@ -16,8 +17,8 @@ function isNullOrUndefined(subject){
         return true;
     }
 
-    // 空文字
-    if(typeof subject === String && subject === ""){
+    // empty object
+    if (typeof subject === Object && Object.keys(subject).length != 0) {
         return true;
     }
 

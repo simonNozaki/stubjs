@@ -1,38 +1,56 @@
 /**
- * アプリ共通定数クラス
+ * App Constants
  * @module const/app-const
  */
 "use strict";
 
 /**
- * 標準出力用定数
+ * Standard Out Constants
  */
-const STD_OUT_CONST = {
+const APP_CONST = {
+
+    /** Application Name */
+    APP_NAME : "stubjs",
 
     /**
-     * トレースメッセージ開始
+     * Trace log start
      */
     TRACE_START : "[Trace log start]",
     
     /**
-     * トレースメッセージ終了
+     * Trace log end
      */
     TRACE_END : "[Trace log end]",
 
     /**
-     * 区切り線
+     * Separator
      */
     STR_SEPARATOR : "#########################",
 
     /**
-     * APIの処理を開始します。
+     * Start API processing.
      */
-    STR_PROCESS_START : "APIの処理を開始します。",
+    STR_PROCESS_START : "Start API processing.",
 
     /**
-     * APIの処理を終了します。
+     * End API processing.
      */
-    STR_PROCESS_END : "APIの処理を終了します。",
+    STR_PROCESS_END : "End API processing.",
+
+    /**
+     * HTTP Method is invalid. Set GET, POST, PUT, PATCH, or DELETE.
+     */
+    STR_HTTP_METHOD_UNDEFINED : "HTTP Method is invalid. Set GET, POST, PUT, PATCH, or DELETE.",
+
+    /**
+     * A resource not found.
+     */
+    STR_RESOURCE_NOT_FOUND : "A resource not found.",
+
+    /**
+     * System error occured.
+     */
+    STR_SYSTEM_ERROR : "System error occured.",
     
     /**
      * 改行コード
@@ -55,4 +73,4 @@ const STD_OUT_CONST = {
     STR_SLASH : "/"
 
 };
-module.exports.STD_OUT_CONST = STD_OUT_CONST;
+module.exports.APP_CONST = APP_CONST;
